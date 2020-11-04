@@ -3,7 +3,8 @@ import Text from "zrender/src/graphic/Text";
 import {RoadLine} from "./RoadLine";
 import {Scene} from "./Scene";
 
-const zr = zrender.init(document.querySelector("#canvas"));
+let container = document.querySelector("#canvas");
+const zr = zrender.init(container);
 
 const scene = new Scene();
 let line = new RoadLine({
@@ -36,7 +37,7 @@ text.on("click", ()=>{
    })
    console.debug(datas)
 })
-text.position = [700, 10]
+text.position = [10, 10]
 scene.add(text);
 zr.add(scene);
 document.oncontextmenu = function(){
@@ -53,3 +54,9 @@ zr.on("contextmenu", function(evt) {
 });
 
 
+window.addEventListener("resize", (e) => {
+   zr.resize({
+      width: container.clientWidth,
+      height: container.clientHeight
+   })
+});
